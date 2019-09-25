@@ -7,7 +7,7 @@ var bodyParser = require('body-parser');
 var app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-const puerto = process.env.PORT || 3700;
+const puerto = process.env.PORT || 3600;
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
     // res.header('Access-Control-Allow-Origin', 'https://979b041a.ngrok.io');
