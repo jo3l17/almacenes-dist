@@ -7,3 +7,4 @@ exports.instalaciones_router.get('/instalaciones/traertodos', instalaciones_1.in
 exports.instalaciones_router.get('/instalaciones/:id', instalaciones_1.instalaciones_controller.getById);
 exports.instalaciones_router.get('/instalaciones', instalaciones_1.instalaciones_controller.getByBusqueda);
 exports.instalaciones_router.get('/instalaciones/:lat/:lng/:miles', instalaciones_1.instalaciones_controller.getByLatLng);
+exports.instalaciones_router.get('/instalaciones/bounds/:maxLng/:minLng/:maxLat/:minLat', instalaciones_1.instalaciones_controller.getByBounds);

@@ -49,6 +49,10 @@ exports.miniBodegas_model = (sequelize) => {
             type: sequelize_1.DataTypes.STRING(91),
             allowNull: true,
             field: 'direccion'
+        },
+        usu_id: {
+            type: sequelize_1.DataTypes.INTEGER,
+            defaultValue: 1
         }
     }, {
         timestamps: false,

@@ -61,36 +61,6 @@ exports.instalaciones_model = (sequelize) => {
             type: sequelize_1.DataTypes.DECIMAL(10, 8),
             allowNull: true,
             field: 'longitud_instalacion'
-        },
-        precioXM2Instalacion: {
-            type: sequelize_1.DataTypes.INTEGER,
-            allowNull: false,
-            defaultValue: 9000,
-            field: 'precioXM2_instalacion'
-        },
-        largo: {
-            type: sequelize_1.DataTypes.INTEGER,
-            allowNull: false,
-            defaultValue: 15,
-            field: 'largo_instalacion'
-        },
-        ancho: {
-            type: sequelize_1.DataTypes.INTEGER,
-            allowNull: false,
-            defaultValue: 10,
-            field: 'ancho_instalacion'
-        },
-        areaTotal: {
-            type: sequelize_1.DataTypes.INTEGER,
-            allowNull: false,
-            defaultValue: 150,
-            field: 'area_instalacion'
-        },
-        precioTotal: {
-            type: sequelize_1.DataTypes.INTEGER,
-            allowNull: false,
-            defaultValue: 1350000,
-            field: 'precio_total_instalacion'
         }
     }, {
         timestamps: false,
