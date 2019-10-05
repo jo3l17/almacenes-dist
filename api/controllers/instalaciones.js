@@ -159,5 +159,54 @@ exports.instalaciones_controller = {
         }).catch((error) => {
             console.log("Error => " + error);
         });
+    },
+    PorMedida: (req, res) => {
+        let { minLat, maxLat, minLng, maxLng, minMedida, maxMedida } = req.params;
+        sequelize_1.instalaciones.findAll({
+            include: [
+                {
+                    model: sequelize_1.miniBodegas
+                },
+                {
+                    model: sequelize_1.instAmn,
+                    include: [{
+                            model: sequelize_1.amenidades
+                        }]
+                },
+                {
+                    model: sequelize_1.unidades,
+                    where: {
+                        areaTotal: {
+                            [Op.between]: [minMedida, maxMedida]
+                        }
+                    }
+                }
+            ],
+            where: {
+                longitudInstalacion: {
+                    [Op.between]: [minLng, maxLng],
+                },
+                [Op.and]: {
+                    latitudInstalacion: {
+                        [Op.between]: [minLat, maxLat],
+                    }
+                }
+            }
+        }).then((instalacion) => {
+            if (instalacion) {
+                res.status(201).json({
+                    message: 'Ok',
+                    content: instalacion
+                });
+            }
+            else {
+                res.status(400).json({
+                    message: 'Error',
+                    content: 'Error al traer los almacenes'
+                });
+            }
+        }).catch((error) => {
+            console.log("Error => " + error);
+        });
     }
 };

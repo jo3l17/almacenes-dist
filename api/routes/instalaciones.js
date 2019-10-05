@@ -8,3 +8,4 @@ exports.instalaciones_router.get('/instalaciones/:id', instalaciones_1.instalaci
 exports.instalaciones_router.get('/instalaciones', instalaciones_1.instalaciones_controller.getByBusqueda);
 exports.instalaciones_router.get('/instalaciones/:lat/:lng/:miles', instalaciones_1.instalaciones_controller.getByLatLng);
 exports.instalaciones_router.get('/instalaciones/bounds/:maxLng/:minLng/:maxLat/:minLat', instalaciones_1.instalaciones_controller.getByBounds);
+exports.instalaciones_router.get('/instalaciones/medidas/:maxLng/:minLng/:maxLat/:minLat/:minMedida/:maxMedida', instalaciones_1.instalaciones_controller.PorMedida);
