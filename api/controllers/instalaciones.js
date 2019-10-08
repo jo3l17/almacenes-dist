@@ -25,11 +25,57 @@ exports.instalaciones_controller = {
             console.log("Error => " + error);
         });
     },
+    getOne: (req, res) => {
+        let { id } = req.params;
+        sequelize_1.instalaciones.findOne({
+            where: {
+                idInstalacion: id
+            },
+            include: [
+                {
+                    model: sequelize_1.miniBodegas
+                },
+                {
+                    model: sequelize_1.galeria
+                },
+                {
+                    model: sequelize_1.instAmn,
+                    include: [{
+                            model: sequelize_1.amenidades
+                        }]
+                },
+                {
+                    model: sequelize_1.unidades,
+                    include: [{
+                            model: sequelize_1.caracteristicas
+                        }]
+                }
+            ]
+        }).then((instalacion) => {
+            if (instalacion) {
+                res.status(201).json({
+                    message: 'Ok',
+                    content: instalacion
+                });
+            }
+            else {
+                res.status(400).json({
+                    message: 'Error',
+                    content: 'Error al traer los almacenes'
+                });
+            }
+        }).catch((error) => {
+            console.log("Error => " + error);
+        });
+    },
     getAll: (req, res) => {
         sequelize_1.instalaciones.findAll({
             include: [
                 {
                     model: sequelize_1.miniBodegas
+                },
+                {
+                    model: sequelize_1.galeria
                 },
                 {
                     model: sequelize_1.instAmn,
@@ -64,6 +110,9 @@ exports.instalaciones_controller = {
             include: [
                 {
                     model: sequelize_1.miniBodegas
+                },
+                {
+                    model: sequelize_1.galeria
                 },
             ],
             where: {
@@ -124,6 +173,9 @@ exports.instalaciones_controller = {
                     model: sequelize_1.miniBodegas
                 },
                 {
+                    model: sequelize_1.galeria
+                },
+                {
                     model: sequelize_1.instAmn,
                     include: [{
                             model: sequelize_1.amenidades
@@ -168,6 +220,9 @@ exports.instalaciones_controller = {
                     model: sequelize_1.miniBodegas
                 },
                 {
+                    model: sequelize_1.galeria
+                },
+                {
                     model: sequelize_1.instAmn,
                     include: [{
                             model: sequelize_1.amenidades
@@ -208,5 +263,122 @@ exports.instalaciones_controller = {
         }).catch((error) => {
             console.log("Error => " + error);
         });
-    }
+    },
+    porAmenidad: (req, res) => {
+        let { minLat, maxLat, minLng, maxLng, clima, acceso, piso } = req.params;
+        sequelize_1.instalaciones.findAll({
+            include: [
+                {
+                    model: sequelize_1.miniBodegas
+                },
+                {
+                    model: sequelize_1.galeria
+                },
+                {
+                    model: sequelize_1.instAmn,
+                    include: [{
+                            model: sequelize_1.amenidades
+                        }]
+                },
+                {
+                    model: sequelize_1.unidades,
+                    required: true,
+                    include: [{
+                            model: sequelize_1.caracteristicas,
+                            where: { [Op.and]: [
+                                    { climaControlado: clima },
+                                    { acceso24Horas: acceso },
+                                    { piso1: piso }
+                                ] }
+                        }]
+                }
+            ],
+            where: {
+                longitudInstalacion: {
+                    [Op.between]: [minLng, maxLng],
+                },
+                [Op.and]: {
+                    latitudInstalacion: {
+                        [Op.between]: [minLat, maxLat],
+                    }
+                }
+            }
+        }).then((instalacion) => {
+            if (instalacion) {
+                res.status(201).json({
+                    message: 'Ok',
+                    content: instalacion
+                });
+            }
+            else {
+                res.status(400).json({
+                    message: 'Error',
+                    content: 'Error al traer los almacenes'
+                });
+            }
+        }).catch((error) => {
+            console.log("Error => " + error);
+        });
+    },
+    porAmenidadYMedida: (req, res) => {
+        let { minLat, maxLat, minLng, maxLng, minMedida, maxMedida, clima, acceso, piso } = req.params;
+        sequelize_1.instalaciones.findAll({
+            include: [
+                {
+                    model: sequelize_1.miniBodegas
+                },
+                {
+                    model: sequelize_1.galeria
+                },
+                {
+                    model: sequelize_1.instAmn,
+                    include: [{
+                            model: sequelize_1.amenidades
+                        }]
+                },
+                {
+                    model: sequelize_1.unidades,
+                    required: true,
+                    where: {
+                        areaTotal: {
+                            [Op.between]: [minMedida, maxMedida]
+                        }
+                    },
+                    include: [{
+                            model: sequelize_1.caracteristicas,
+                            where: { [Op.and]: [
+                                    { climaControlado: clima },
+                                    { acceso24Horas: acceso },
+                                    { piso1: piso }
+                                ] }
+                        }]
+                }
+            ],
+            where: {
+                longitudInstalacion: {
+                    [Op.between]: [minLng, maxLng],
+                },
+                [Op.and]: {
+                    latitudInstalacion: {
+                        [Op.between]: [minLat, maxLat],
+                    }
+                }
+            }
+        }).then((instalacion) => {
+            if (instalacion) {
+                res.status(201).json({
+                    message: 'Ok',
+                    content: instalacion
+                });
+            }
+            else {
+                res.status(400).json({
+                    message: 'Error',
+                    content: 'Error al traer los almacenes'
+                });
+            }
+        }).catch((error) => {
+            console.log("Error => " + error);
+        });
+    },
 };

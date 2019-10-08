@@ -15,15 +15,15 @@ exports.caracteristicas_model = (sequelize) => {
             allowNull: true,
             field: 'clima_controlado'
         },
-        interior: {
+        acceso24Horas: {
             type: sequelize_1.DataTypes.TINYINT,
             allowNull: true,
-            field: 'interior'
+            field: 'acceso24Horas'
         },
-        piso: {
+        piso1: {
             type: sequelize_1.DataTypes.INTEGER,
             allowNull: true,
-            field: 'interior'
+            field: 'piso1'
         }
     }, {
         timestamps: false,
