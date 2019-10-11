@@ -1,25 +1,23 @@
 "use strict";
-/* jshint indent: 1 */
-// tslint:disable
 Object.defineProperty(exports, "__esModule", { value: true });
 const sequelize_1 = require("sequelize");
-exports.galeria_model = (sequelize) => {
-    var galeria_model = sequelize.define('t_galeria', {
-        idGaleria: {
+exports.visitas_model = (sequelize) => {
+    var visitas_model = sequelize.define('t_visitas', {
+        idvisitas: {
             type: sequelize_1.DataTypes.INTEGER,
             allowNull: false,
             autoIncrement: true,
             primaryKey: true,
-            field: 'id_galeria'
+            field: 'id_visitas'
         },
-        url: {
-            type: sequelize_1.DataTypes.STRING(1000),
+        nroVisitas: {
+            type: sequelize_1.DataTypes.STRING(15),
             allowNull: false,
-            field: 'url_galeria'
+            field: 'nombre_visitas'
         }
     }, {
         timestamps: false,
-        tableName: 't_galeria'
+        tableName: 't_visitas'
     });
-    return galeria_model;
+    return visitas_model;
 };

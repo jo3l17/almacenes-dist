@@ -45,6 +45,24 @@ exports.instalaciones_controller = {
                         }]
                 },
                 {
+                    model: sequelize_1.cMudanza
+                },
+                {
+                    model: sequelize_1.cFacturacion
+                },
+                {
+                    model: sequelize_1.cAcceso
+                },
+                {
+                    model: sequelize_1.cAdministracion
+                },
+                {
+                    model: sequelize_1.cSeguridad
+                },
+                {
+                    model: sequelize_1.cCobertura
+                },
+                {
                     model: sequelize_1.unidades,
                     include: [{
                             model: sequelize_1.caracteristicas

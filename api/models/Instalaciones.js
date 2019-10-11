@@ -52,6 +52,12 @@ exports.instalaciones_model = (sequelize) => {
             allowNull: true,
             field: 'direccion_instalacion'
         },
+        descripcionInstalacion: {
+            type: sequelize_1.DataTypes.TEXT,
+            allowNull: true,
+            field: 'descripcion_instalacion',
+            defaultValue: 'no hay descripción'
+        },
         latitudInstalacion: {
             type: sequelize_1.DataTypes.DECIMAL(10, 8),
             allowNull: true,
@@ -61,6 +67,12 @@ exports.instalaciones_model = (sequelize) => {
             type: sequelize_1.DataTypes.DECIMAL(10, 8),
             allowNull: true,
             field: 'longitud_instalacion'
+        },
+        visitas: {
+            type: sequelize_1.DataTypes.INTEGER,
+            allowNull: false,
+            defaultValue: 0,
+            field: 'visitas_instalacion'
         }
     }, {
         timestamps: false,

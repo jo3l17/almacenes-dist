@@ -3,38 +3,44 @@
 // tslint:disable
 Object.defineProperty(exports, "__esModule", { value: true });
 const sequelize_1 = require("sequelize");
-exports.cotizacion_model = (sequelize) => {
-    var cotizacion_model = sequelize.define('t_cotizacion', {
-        idCotizacion: {
+exports.reserva_model = (sequelize) => {
+    var reserva_model = sequelize.define('t_reserva', {
+        idReserva: {
             type: sequelize_1.DataTypes.INTEGER,
             allowNull: false,
             autoIncrement: true,
             primaryKey: true,
-            field: 'id_cotizacion'
+            field: 'id_reserva'
         },
-        nombreCotizacion: {
+        nombreReserva: {
             type: sequelize_1.DataTypes.STRING(15),
             allowNull: false,
-            field: 'nombre_cotizacion'
+            field: 'nombre_reserva'
         },
-        apellidoCotizacion: {
+        apellidoReserva: {
             type: sequelize_1.DataTypes.STRING(15),
             allowNull: false,
-            field: 'apellido_cotizacion'
+            field: 'apellido_reserva'
         },
-        telefonoCotizacion: {
+        telefonoReserva: {
             type: sequelize_1.DataTypes.STRING(15),
             allowNull: false,
-            field: 'telefono_cotizacion'
+            field: 'telefono_reserva'
         },
-        emailCotizacion: {
+        emailReserva: {
             type: sequelize_1.DataTypes.STRING(15),
             allowNull: false,
-            field: 'email_cotizacion'
+            field: 'email_reserva'
+        },
+        estadoReserva: {
+            type: sequelize_1.DataTypes.TINYINT,
+            allowNull: false,
+            defaultValue: 0,
+            field: 'estado_reserva'
         }
     }, {
         timestamps: false,
-        tableName: 't_cotizacion'
+        tableName: 't_reserva'
     });
-    return cotizacion_model;
+    return reserva_model;
 };

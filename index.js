@@ -3,6 +3,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const sequelize_1 = require("./api/config/sequelize");
 const instalaciones_1 = require("./api/routes/instalaciones");
 const usuario_1 = require("./api/routes/usuario");
+const miniBodegas_1 = require("./api/routes/miniBodegas");
+const galeria_1 = require("./api/routes/galeria");
 var express = require('express');
 var bodyParser = require('body-parser');
 var app = express();
@@ -20,7 +22,7 @@ app.use((req, res, next) => {
 require('./public/google-place-details')(app, {});
 app.listen(puerto, () => {
     console.log(`servidor coriendo en ${puerto}`);
-    sequelize_1.sequelize.sync({ force: false }).then(() => {
+    sequelize_1.sequelize.sync({ force: false }).then((respuesta) => {
         console.log('base de datos creada');
     }).catch((error) => {
         console.log(error);
@@ -29,4 +31,7 @@ app.listen(puerto, () => {
 });
 app.use('/api', usuario_1.usuario_router);
 app.use('/api', instalaciones_1.instalaciones_router);
+app.use('/api', miniBodegas_1.miniBodegas_router);
+app.use('/api', galeria_1.galeria_router);
+// app.use(express.static(__dirname, 'galeria'));
 // app.use('/',(req:any,res:any)=>{res.send('it works :v')})
