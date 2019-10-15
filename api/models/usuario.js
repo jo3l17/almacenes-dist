@@ -63,9 +63,7 @@ exports.usuario_model = (sequelize) => {
     };
     usuario_model.prototype.generateJWT = function () {
         let payload = {
-            usu_id: this.usu_email,
-            usu_nom: `${this.usu_nom} ${this.usu_ape}`,
-            usu_tipo: this.usu_tipo
+            usu_id: this.usu_id,
         };
         var token = jwt.sign(payload, 'huariques', { expiresIn: '30min' }, { algorithm: 'RS256' });
         return token;

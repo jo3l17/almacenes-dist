@@ -73,6 +73,11 @@ exports.instalaciones_model = (sequelize) => {
             allowNull: false,
             defaultValue: 0,
             field: 'visitas_instalacion'
+        },
+        usuId: {
+            type: sequelize_1.DataTypes.INTEGER,
+            allowNull: true,
+            field: 'usu_id'
         }
     }, {
         timestamps: false,

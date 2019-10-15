@@ -5,6 +5,7 @@ const instalaciones_1 = require("./api/routes/instalaciones");
 const usuario_1 = require("./api/routes/usuario");
 const miniBodegas_1 = require("./api/routes/miniBodegas");
 const galeria_1 = require("./api/routes/galeria");
+const registroClickTelefono_1 = require("./api/routes/registroClickTelefono");
 var express = require('express');
 var bodyParser = require('body-parser');
 var app = express();
@@ -29,6 +30,7 @@ app.listen(puerto, () => {
         console.log('error al crear base de datos');
     });
 });
+app.use('/api', registroClickTelefono_1.clickTelefono_router);
 app.use('/api', usuario_1.usuario_router);
 app.use('/api', instalaciones_1.instalaciones_router);
 app.use('/api', miniBodegas_1.miniBodegas_router);

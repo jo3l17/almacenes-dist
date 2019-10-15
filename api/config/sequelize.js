@@ -15,9 +15,11 @@ const cAdministracion_1 = require("../models/cAdministracion");
 const cCobertura_1 = require("../models/cCobertura");
 const cSeguridad_1 = require("../models/cSeguridad");
 const reservas_1 = require("../models/reservas");
+const regisroClickTelefono_1 = require("../models/regisroClickTelefono");
 const Sequelize = require('sequelize');
-exports.sequelize = new Sequelize('R63uiu6aze', 'R63uiu6aze', 'ZTWDTRy5QP', {
-    host: 'remotemysql.com',
+// export const sequelize = new Sequelize('R63uiu6aze', 'R63uiu6aze', 'ZTWDTRy5QP', {
+exports.sequelize = new Sequelize('hardmachine_almacenes', 'hardmachine_admin', 'kassandra@2015', {
+    host: '142.44.199.21',
     dialect: 'mysql',
     timezone: '-05:00',
     logging: console.log
@@ -37,12 +39,15 @@ exports.cAdministracion = cAdministracion_1.c_administracion_model(exports.seque
 exports.cCobertura = cCobertura_1.c_cobertura_model(exports.sequelize);
 exports.cSeguridad = cSeguridad_1.c_seguridad_model(exports.sequelize);
 exports.reserva = reservas_1.reserva_model(exports.sequelize);
+exports.clickTelefono = regisroClickTelefono_1.clickTelefono_model(exports.sequelize);
 exports.instalaciones.belongsTo(exports.miniBodegas, { foreignKey: 'id_operador' });
 exports.miniBodegas.hasMany(exports.instalaciones, { foreignKey: 'id_operador' });
 exports.unidades.belongsTo(exports.instalaciones, { foreignKey: 'id_instalacion' });
 exports.instalaciones.hasMany(exports.unidades, { foreignKey: 'id_instalacion' });
 exports.miniBodegas.belongsTo(exports.Usuario, { foreignKey: 'usu_id' });
 exports.Usuario.hasMany(exports.miniBodegas, { foreignKey: 'usu_id' });
+exports.instalaciones.belongsTo(exports.Usuario, { foreignKey: 'usu_id' });
+exports.Usuario.hasOne(exports.instalaciones, { foreignKey: 'usu_id' });
 exports.instAmn.belongsTo(exports.amenidades, { foreignKey: 'id_amenidad' });
 exports.amenidades.hasMany(exports.instAmn, { foreignKey: 'id_amenidad' });
 exports.instAmn.belongsTo(exports.instalaciones, { foreignKey: 'id_instalacion' });
@@ -65,3 +70,5 @@ exports.cMudanza.belongsTo(exports.instalaciones, { foreignKey: 'id_instalacion'
 exports.cAdministracion.belongsTo(exports.instalaciones, { foreignKey: 'id_instalacion' });
 exports.cCobertura.belongsTo(exports.instalaciones, { foreignKey: 'id_instalacion' });
 exports.cSeguridad.belongsTo(exports.instalaciones, { foreignKey: 'id_instalacion' });
+exports.clickTelefono.belongsTo(exports.instalaciones, { foreignKey: 'id_instalacion' });
+exports.instalaciones.hasMany(exports.clickTelefono, { foreignKey: 'id_instalacion' });
