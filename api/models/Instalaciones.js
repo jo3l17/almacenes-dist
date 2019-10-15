@@ -38,7 +38,7 @@ exports.instalaciones_model = (sequelize) => {
             field: 'comuna_instalacion'
         },
         telefonoInstalacion: {
-            type: sequelize_1.DataTypes.STRING(41),
+            type: sequelize_1.DataTypes.INTEGER,
             allowNull: true,
             field: 'telefono_instalacion'
         },
