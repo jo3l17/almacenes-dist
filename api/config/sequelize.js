@@ -17,9 +17,10 @@ const cSeguridad_1 = require("../models/cSeguridad");
 const reservas_1 = require("../models/reservas");
 const regisroClickTelefono_1 = require("../models/regisroClickTelefono");
 const Sequelize = require('sequelize');
-// export const sequelize = new Sequelize('R63uiu6aze', 'R63uiu6aze', 'ZTWDTRy5QP', {
-exports.sequelize = new Sequelize('hardmachine_almacenes', 'hardmachine_admin', 'kassandra@2015', {
-    host: '142.44.199.21',
+exports.sequelize = new Sequelize('R63uiu6aze', 'R63uiu6aze', 'ZTWDTRy5QP', {
+    // export const sequelize = new Sequelize('hardmachine_almacenes', 'hardmachine_admin', 'kassandra@2015', {
+    // host: '142.44.199.21',
+    host: 'remotemysql.com',
     dialect: 'mysql',
     timezone: '-05:00',
     logging: console.log
