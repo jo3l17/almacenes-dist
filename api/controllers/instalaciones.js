@@ -183,6 +183,47 @@ exports.instalaciones_controller = {
             console.log("Error => " + error);
         });
     },
+    getByLatLng1: (req, res) => {
+        let { lat, lng, distance } = req.params;
+        let distance1 = sequelize_1.sequelize.col('distance');
+        sequelize_1.instalaciones.findAll({
+            attributes: [[sequelize_1.sequelize.literal("6371 * acos(cos(radians(" + lat + ")) * cos(radians(latitud_instalacion)) * cos(radians(" + lng + ") - radians(longitud_instalacion)) + sin(radians(" + lat + ")) * sin(radians(latitud_instalacion)))"), 'distance']],
+            order: sequelize_1.sequelize.col('distance'),
+            limit: 10,
+            include: [
+                {
+                    model: sequelize_1.miniBodegas
+                },
+                {
+                    model: sequelize_1.galeria
+                },
+                {
+                    model: sequelize_1.instAmn,
+                    include: [{
+                            model: sequelize_1.amenidades
+                        }]
+                },
+                {
+                    model: sequelize_1.unidades
+                }
+            ],
+        }).then((instalacion) => {
+            if (instalacion) {
+                res.status(201).json({
+                    message: 'Ok',
+                    content: instalacion
+                });
+            }
+            else {
+                res.status(400).json({
+                    message: 'Error',
+                    content: 'Error al traer los almacenes'
+                });
+            }
+        }).catch((error) => {
+            console.log("Error => " + error);
+        });
+    },
     getByBounds: (req, res) => {
         let { minLat, maxLat, minLng, maxLng } = req.params;
         sequelize_1.instalaciones.findAll({
@@ -303,11 +344,13 @@ exports.instalaciones_controller = {
                     required: true,
                     include: [{
                             model: sequelize_1.caracteristicas,
-                            where: { [Op.and]: [
+                            where: {
+                                [Op.and]: [
                                     { climaControlado: clima },
                                     { acceso24Horas: acceso },
                                     { piso1: piso }
-                                ] }
+                                ]
+                            }
                         }]
                 }
             ],
@@ -364,11 +407,13 @@ exports.instalaciones_controller = {
                     },
                     include: [{
                             model: sequelize_1.caracteristicas,
-                            where: { [Op.and]: [
+                            where: {
+                                [Op.and]: [
                                     { climaControlado: clima },
                                     { acceso24Horas: acceso },
                                     { piso1: piso }
-                                ] }
+                                ]
+                            }
                         }]
                 }
             ],

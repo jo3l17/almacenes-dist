@@ -7,6 +7,7 @@ exports.instalaciones_router.get('/instalaciones/traertodos', instalaciones_1.in
 exports.instalaciones_router.get('/instalaciones/:id', instalaciones_1.instalaciones_controller.getById);
 exports.instalaciones_router.get('/instalaciones/getOne/:id', instalaciones_1.instalaciones_controller.getOne);
 exports.instalaciones_router.get('/instalaciones', instalaciones_1.instalaciones_controller.getByBusqueda);
+exports.instalaciones_router.get('/instalaciones/distance/:lat/:lng/:distance', instalaciones_1.instalaciones_controller.getByLatLng1);
 exports.instalaciones_router.get('/instalaciones/:lat/:lng/:miles', instalaciones_1.instalaciones_controller.getByLatLng);
 exports.instalaciones_router.get('/instalaciones/bounds/:maxLng/:minLng/:maxLat/:minLat', instalaciones_1.instalaciones_controller.getByBounds);
 exports.instalaciones_router.get('/instalaciones/medidas/:maxLng/:minLng/:maxLat/:minLat/:minMedida/:maxMedida', instalaciones_1.instalaciones_controller.PorMedida);

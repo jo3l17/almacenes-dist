@@ -33,5 +33,6 @@ app.use('/api', usuario_1.usuario_router);
 app.use('/api', instalaciones_1.instalaciones_router);
 app.use('/api', miniBodegas_1.miniBodegas_router);
 app.use('/api', galeria_1.galeria_router);
-// app.use(express.static(__dirname, 'galeria'));
+// app.use('/galeria',express.static(__dirname, '/galeria'));
+app.use('/galeria', express.static('galeria'));
 // app.use('/',(req:any,res:any)=>{res.send('it works :v')})
