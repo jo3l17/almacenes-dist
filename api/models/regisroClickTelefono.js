@@ -11,7 +11,7 @@ exports.clickTelefono_model = (sequelize) => {
             field: 'id'
         },
         ipCliente: {
-            type: sequelize_1.DataTypes.STRING(14),
+            type: sequelize_1.DataTypes.STRING(16),
             allowNull: false,
             defaultValue: 0,
             field: 'ip_cliente'
