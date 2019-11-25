@@ -8,16 +8,16 @@ exports.c_seguridad_model = (sequelize) => {
             allowNull: false,
             autoIncrement: true,
             primaryKey: true,
-            field: 'id_c_seguridad'
+            field: 'id'
         },
         sVideocamaras: {
-            type: sequelize_1.DataTypes.TINYINT,
+            type: sequelize_1.DataTypes.BOOLEAN,
             allowNull: false,
             defaultValue: 0,
             field: 's_videocamaras'
         },
         sCercadoiluminado: {
-            type: sequelize_1.DataTypes.TINYINT,
+            type: sequelize_1.DataTypes.BOOLEAN,
             allowNull: false,
             defaultValue: 0,
             field: 's_cercado_iluminado'

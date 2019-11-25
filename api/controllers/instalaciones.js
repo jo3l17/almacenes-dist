@@ -36,34 +36,22 @@ exports.instalaciones_controller = {
                     model: sequelize_1.miniBodegas
                 },
                 {
-                    model: sequelize_1.galeria
+                    model: sequelize_1.galeria,
+                    where: {
+                        eliminar: false,
+                    },
+                    required: false
                 },
                 {
-                    model: sequelize_1.instAmn,
-                    include: [{
-                            model: sequelize_1.amenidades
-                        }]
-                },
-                {
-                    model: sequelize_1.cMudanza
-                },
-                {
-                    model: sequelize_1.cFacturacion
-                },
-                {
-                    model: sequelize_1.cAcceso
-                },
-                {
-                    model: sequelize_1.cAdministracion
-                },
-                {
-                    model: sequelize_1.cSeguridad
-                },
-                {
-                    model: sequelize_1.cCobertura
+                    model: sequelize_1.horarios,
+                    required: false
                 },
                 {
                     model: sequelize_1.unidades,
+                    where: {
+                        eliminar: 0,
+                    },
+                    required: false,
                     include: [{
                             model: sequelize_1.caracteristicas
                         }]
@@ -93,16 +81,18 @@ exports.instalaciones_controller = {
                     model: sequelize_1.miniBodegas
                 },
                 {
-                    model: sequelize_1.galeria
+                    model: sequelize_1.galeria,
+                    where: {
+                        eliminar: false,
+                    },
+                    required: false
                 },
                 {
-                    model: sequelize_1.instAmn,
-                    include: [{
-                            model: sequelize_1.amenidades
-                        }]
-                },
-                {
-                    model: sequelize_1.unidades
+                    model: sequelize_1.unidades,
+                    where: {
+                        eliminar: 0,
+                    },
+                    required: false
                 }
             ]
         }).then((instalacion) => {
@@ -198,13 +188,12 @@ exports.instalaciones_controller = {
                     model: sequelize_1.galeria
                 },
                 {
-                    model: sequelize_1.instAmn,
-                    include: [{
-                            model: sequelize_1.amenidades
-                        }]
-                },
-                {
-                    model: sequelize_1.unidades
+                    model: sequelize_1.unidades,
+                    where: {
+                        eliminar: 0,
+                        Visible: 0
+                    },
+                    required: false
                 }
             ],
         }).then((instalacion) => {
@@ -232,16 +221,19 @@ exports.instalaciones_controller = {
                     model: sequelize_1.miniBodegas
                 },
                 {
-                    model: sequelize_1.galeria
+                    model: sequelize_1.galeria,
+                    where: {
+                        eliminar: false,
+                    },
+                    required: false
                 },
                 {
-                    model: sequelize_1.instAmn,
-                    include: [{
-                            model: sequelize_1.amenidades
-                        }]
-                },
-                {
-                    model: sequelize_1.unidades
+                    model: sequelize_1.unidades,
+                    where: {
+                        eliminar: 0,
+                        Visible: 0
+                    },
+                    required: false
                 }
             ],
             where: {
@@ -279,21 +271,22 @@ exports.instalaciones_controller = {
                     model: sequelize_1.miniBodegas
                 },
                 {
-                    model: sequelize_1.galeria
-                },
-                {
-                    model: sequelize_1.instAmn,
-                    include: [{
-                            model: sequelize_1.amenidades
-                        }]
+                    model: sequelize_1.galeria,
+                    where: {
+                        eliminar: false,
+                    },
+                    required: false
                 },
                 {
                     model: sequelize_1.unidades,
                     where: {
                         areaTotal: {
                             [Op.between]: [minMedida, maxMedida]
-                        }
-                    }
+                        },
+                        eliminar: 0,
+                        Visible: 0
+                    },
+                    required: false
                 }
             ],
             where: {
@@ -331,21 +324,23 @@ exports.instalaciones_controller = {
                     model: sequelize_1.miniBodegas
                 },
                 {
-                    model: sequelize_1.galeria
-                },
-                {
-                    model: sequelize_1.instAmn,
-                    include: [{
-                            model: sequelize_1.amenidades
-                        }]
+                    model: sequelize_1.galeria,
+                    where: {
+                        eliminar: false,
+                    },
+                    required: false
                 },
                 {
                     model: sequelize_1.unidades,
+                    where: {
+                        eliminar: 0,
+                        Visible: 0
+                    },
                     required: true,
                     include: [{
                             model: sequelize_1.caracteristicas,
                             where: {
-                                [Op.and]: [
+                                [Op.or]: [
                                     { climaControlado: clima },
                                     { acceso24Horas: acceso },
                                     { piso1: piso }
@@ -389,18 +384,18 @@ exports.instalaciones_controller = {
                     model: sequelize_1.miniBodegas
                 },
                 {
-                    model: sequelize_1.galeria
-                },
-                {
-                    model: sequelize_1.instAmn,
-                    include: [{
-                            model: sequelize_1.amenidades
-                        }]
+                    model: sequelize_1.galeria,
+                    where: {
+                        eliminar: false,
+                    },
+                    required: false
                 },
                 {
                     model: sequelize_1.unidades,
                     required: true,
                     where: {
+                        eliminar: 0,
+                        Visible: 0,
                         areaTotal: {
                             [Op.between]: [minMedida, maxMedida]
                         }
@@ -408,7 +403,7 @@ exports.instalaciones_controller = {
                     include: [{
                             model: sequelize_1.caracteristicas,
                             where: {
-                                [Op.and]: [
+                                [Op.or]: [
                                     { climaControlado: clima },
                                     { acceso24Horas: acceso },
                                     { piso1: piso }
@@ -444,4 +439,96 @@ exports.instalaciones_controller = {
             console.log("Error => " + error);
         });
     },
+    getAllByUsuId: (req, res) => {
+        let { usuId } = req.params;
+        sequelize_1.instalaciones.findAll({
+            where: {
+                usuId
+            },
+            include: [
+                {
+                    model: sequelize_1.visitasInstalaciones
+                }
+            ]
+        }).then((instalacion) => {
+            if (instalacion) {
+                res.status(201).json({
+                    message: 'Ok',
+                    content: instalacion
+                });
+            }
+            else {
+                res.status(400).json({
+                    message: 'Error',
+                    content: 'Error al traer los almacenes'
+                });
+            }
+        }).catch((error) => {
+            console.log("Error => " + error);
+        });
+    },
+    UpdateById: (req, res) => {
+        let { idInstalacion } = req.body;
+        sequelize_1.instalaciones.update(req.body, {
+            where: { idInstalacion: idInstalacion }
+        }).then((Instalacion) => {
+            if (Instalacion) {
+                res.status(201).json({
+                    message: 'Ok',
+                    content: Instalacion
+                });
+            }
+            else {
+                res.status(200).json({
+                    message: 'Error',
+                    content: 'Error al actualizar Instalacion'
+                });
+            }
+        }).catch((error) => {
+            console.log("Error => " + error);
+        });
+    },
+    getAllNameandID: (req, res) => {
+        let { id_operador } = req.params;
+        sequelize_1.instalaciones.findAll({
+            attributes: ['id', 'nombre_instalacion'],
+            where: {
+                id_operador,
+                eliminar: 0
+            }
+        }).then((instalacion) => {
+            if (instalacion) {
+                res.status(201).json({
+                    message: 'Ok',
+                    content: instalacion
+                });
+            }
+            else {
+                res.status(400).json({
+                    message: 'Error',
+                    content: 'Error al traer los almacenes'
+                });
+            }
+        }).catch((error) => {
+            console.log("Error => " + error);
+        });
+    },
+    getThefirst: (req, res) => {
+        sequelize_1.instalaciones.findOne().then((instalacion) => {
+            if (instalacion) {
+                res.status(201).json({
+                    message: 'Ok',
+                    content: instalacion
+                });
+            }
+            else {
+                res.status(400).json({
+                    message: 'Error',
+                    content: 'Error al traer los almacenes'
+                });
+            }
+        }).catch((error) => {
+            console.log("Error => " + error);
+        });
+    }
 };

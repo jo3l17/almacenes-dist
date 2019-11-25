@@ -8,40 +8,40 @@ exports.c_acceso_model = (sequelize) => {
             allowNull: false,
             autoIncrement: true,
             primaryKey: true,
-            field: 'id_c_acceso'
+            field: 'id'
         },
         aPuertaElectronica: {
-            type: sequelize_1.DataTypes.TINYINT,
+            type: sequelize_1.DataTypes.BOOLEAN,
             allowNull: false,
             defaultValue: 0,
             field: 'a_puerta_electronica'
         },
         aMuelleCarga: {
-            type: sequelize_1.DataTypes.TINYINT,
+            type: sequelize_1.DataTypes.BOOLEAN,
             allowNull: false,
             defaultValue: 0,
             field: 'a_muelle_carga'
         },
         aAscensor: {
-            type: sequelize_1.DataTypes.TINYINT,
+            type: sequelize_1.DataTypes.BOOLEAN,
             allowNull: false,
             defaultValue: 0,
             field: 'a_ascensor'
         },
         aCarrosMano: {
-            type: sequelize_1.DataTypes.TINYINT,
+            type: sequelize_1.DataTypes.BOOLEAN,
             allowNull: false,
             defaultValue: 0,
             field: 'a_carros_mano'
         },
         aQuiosco: {
-            type: sequelize_1.DataTypes.TINYINT,
+            type: sequelize_1.DataTypes.BOOLEAN,
             allowNull: false,
             defaultValue: 0,
             field: 'a_quiosco'
         },
         aAcceso24: {
-            type: sequelize_1.DataTypes.TINYINT,
+            type: sequelize_1.DataTypes.BOOLEAN,
             allowNull: false,
             defaultValue: 0,
             field: 'a_acceso_24'

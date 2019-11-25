@@ -3,13 +3,15 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const sequelize_1 = require("./../config/sequelize");
 const SubirArchivoFirebase_1 = require("../utils/SubirArchivoFirebase");
+const crypto = require('crypto');
 exports.usuario_controller = {
     login: (req, res) => {
         let { usu_email, usu_pass } = req.body;
         // findOne => 
         sequelize_1.Usuario.findOne({
             where: {
-                usu_email: usu_email
+                usu_email: usu_email,
+                usu_eliminar: 0
             }
         }).then((objUsuario) => {
             if (objUsuario) {
@@ -41,6 +43,8 @@ exports.usuario_controller = {
                 };
                 res.status(200).json(response);
             }
+        }).catch((error) => {
+            console.log("Error => " + error);
         });
     },
     getAll: (req, res) => {
@@ -178,7 +182,7 @@ exports.usuario_controller = {
                         else {
                             let response = {
                                 message: 'error',
-                                content: 'Erro al crear el usuario y/o token',
+                                content: 'Error al crear el usuario y/o token',
                             };
                             res.status(200).json(response);
                         }
@@ -194,6 +198,30 @@ exports.usuario_controller = {
                 }
             });
         }
+    },
+    getUsuImg: (req, res) => {
+        let { id } = req.params;
+        sequelize_1.Usuario.findOne({
+            where: {
+                usu_id: id
+            },
+            attributes: ['usu_img']
+        }).then((usuario) => {
+            if (usuario) {
+                res.status(201).json({
+                    message: 'Ok',
+                    content: usuario
+                });
+            }
+            else {
+                res.status(200).json({
+                    message: 'Error',
+                    content: 'Error al traer usuario'
+                });
+            }
+        }).catch((error) => {
+            console.log("Error => " + error);
+        });
     },
     upDateById: (req, res) => {
         let imagen = req.file;
@@ -251,5 +279,28 @@ exports.usuario_controller = {
                 console.log("Error => " + error);
             });
         }
+    },
+    updatePassword: (req, res) => {
+        let { usu_id, usu_pass } = req.body;
+        let usu_salt = crypto.randomBytes(16).toString('hex');
+        let usu_hash = crypto.pbkdf2Sync(usu_pass, usu_salt, 1000, 64, 'sha512').toString('hex');
+        sequelize_1.Usuario.update({ usu_salt, usu_hash, password: usu_pass }, {
+            where: { usu_id }
+        }).then((usuario) => {
+            if (usuario) {
+                res.status(201).json({
+                    message: 'Ok',
+                    content: usuario
+                });
+            }
+            else {
+                res.status(200).json({
+                    message: 'Error',
+                    content: 'Error al actualizar usuario'
+                });
+            }
+        }).catch((error) => {
+            console.log("Error => " + error);
+        });
     }
 };

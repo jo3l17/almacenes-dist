@@ -10,12 +10,22 @@ exports.galeria_model = (sequelize) => {
             allowNull: false,
             autoIncrement: true,
             primaryKey: true,
-            field: 'id_galeria'
+            field: 'id'
         },
         url: {
             type: sequelize_1.DataTypes.STRING(1000),
             allowNull: false,
             field: 'url_galeria'
+        },
+        orden: {
+            type: sequelize_1.DataTypes.TINYINT,
+            allowNull: false,
+            field: 'orden'
+        },
+        eliminar: {
+            type: sequelize_1.DataTypes.BOOLEAN,
+            allowNull: false,
+            field: 'eliminar',
         }
     }, {
         timestamps: false,

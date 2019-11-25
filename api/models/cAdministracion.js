@@ -8,16 +8,16 @@ exports.c_administracion_model = (sequelize) => {
             allowNull: false,
             autoIncrement: true,
             primaryKey: true,
-            field: 'id_c_administracion'
+            field: 'id'
         },
         adTarifaAdministrativa: {
-            type: sequelize_1.DataTypes.TINYINT,
+            type: sequelize_1.DataTypes.BOOLEAN,
             allowNull: false,
             defaultValue: 0,
             field: 'ad_tarifa_administrativa'
         },
         adCorreo: {
-            type: sequelize_1.DataTypes.TINYINT,
+            type: sequelize_1.DataTypes.BOOLEAN,
             allowNull: false,
             defaultValue: 0,
             field: 'ad_correo'

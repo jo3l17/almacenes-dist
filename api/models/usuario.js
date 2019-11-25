@@ -10,6 +10,7 @@ exports.usuario_model = (sequelize) => {
             primaryKey: true,
             autoIncrement: true,
             allowNull: false,
+            field: 'id'
         },
         usu_email: {
             type: sequelize_1.DataTypes.STRING(50),
@@ -43,6 +44,12 @@ exports.usuario_model = (sequelize) => {
         usu_img: {
             type: sequelize_1.DataTypes.STRING(1000),
             allowNull: true,
+        },
+        usu_eliminar: {
+            type: sequelize_1.DataTypes.BOOLEAN,
+            allowNull: false,
+            defaultValue: false,
+            field: 'eliminar'
         }
     }, {
         timestamps: false,
@@ -64,8 +71,11 @@ exports.usuario_model = (sequelize) => {
     usuario_model.prototype.generateJWT = function () {
         let payload = {
             usu_id: this.usu_id,
+            usu_nom: `${this.usu_nom} ${this.usu_ape}`,
+            usu_tipo: this.usu_tipo,
         };
-        var token = jwt.sign(payload, 'huariques', { expiresIn: '30min' }, { algorithm: 'RS256' });
+        var token = jwt.sign(payload, 'mercadoBodegas', { expiresIn: '8h' }, { algorithm: 'RS256' });
+        // var token = jwt.sign(payload, 'mercadoBodegas', { expiresIn: '30min' }, { algorithm: 'RS256' });
         return token;
     };
     return usuario_model;

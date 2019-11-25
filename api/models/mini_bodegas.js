@@ -8,25 +8,20 @@ exports.miniBodegas_model = (sequelize) => {
             allowNull: false,
             autoIncrement: true,
             primaryKey: true,
-            field: 'id_operador'
+            field: 'id'
         },
         nombreOperador: {
             type: sequelize_1.DataTypes.STRING(41),
             allowNull: true,
-            field: 'nombre_operador'
-        },
-        numeroInstalaciones: {
-            type: sequelize_1.DataTypes.INTEGER,
-            allowNull: true,
-            field: 'numero_instalaciones'
+            field: 'nombre'
         },
         paginaWeb: {
             type: sequelize_1.DataTypes.STRING(53),
             allowNull: true,
-            field: 'pagina_WEB'
+            field: 'pagina_web'
         },
         region: {
-            type: sequelize_1.DataTypes.STRING(12),
+            type: sequelize_1.DataTypes.STRING(255),
             allowNull: true,
             field: 'region'
         },
@@ -53,7 +48,13 @@ exports.miniBodegas_model = (sequelize) => {
         usu_id: {
             type: sequelize_1.DataTypes.INTEGER,
             defaultValue: 1
-        }
+        },
+        eliminar: {
+            type: sequelize_1.DataTypes.BOOLEAN,
+            allowNull: false,
+            defaultValue: false,
+            field: 'eliminar'
+        },
     }, {
         timestamps: false,
         tableName: 't_miniBodegas'

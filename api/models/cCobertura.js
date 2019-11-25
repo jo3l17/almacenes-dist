@@ -8,22 +8,22 @@ exports.c_cobertura_model = (sequelize) => {
             allowNull: false,
             autoIncrement: true,
             primaryKey: true,
-            field: 'id_c_cobertura'
+            field: 'id'
         },
         cSeguroRequerido: {
-            type: sequelize_1.DataTypes.TINYINT,
+            type: sequelize_1.DataTypes.BOOLEAN,
             allowNull: false,
             defaultValue: 0,
             field: 'c_seguro_requerido'
         },
         cSeguroDisponible: {
-            type: sequelize_1.DataTypes.TINYINT,
+            type: sequelize_1.DataTypes.BOOLEAN,
             allowNull: false,
             defaultValue: 0,
             field: 'c_seguro_disponible'
         },
         cSeguroPropietarios: {
-            type: sequelize_1.DataTypes.TINYINT,
+            type: sequelize_1.DataTypes.BOOLEAN,
             allowNull: false,
             defaultValue: 0,
             field: 'c_seguro_propietarios'

@@ -16,3 +16,5 @@ exports.usuario_router.get('/usuario/traertodos', usuario_1.usuario_controller.g
 exports.usuario_router.get('/usuario/traerporcorreo/:correo', usuario_1.usuario_controller.getByEmail);
 exports.usuario_router.get('/usuario/traerporid/:id', usuario_1.usuario_controller.getById);
 exports.usuario_router.put('/usuario/actualizar/:id', multer.single('imagen'), usuario_1.usuario_controller.upDateById);
+exports.usuario_router.get('/usuario/imagen/:id', usuario_1.usuario_controller.getUsuImg);
+exports.usuario_router.post('/usuario/cambiarPassword', usuario_1.usuario_controller.updatePassword);

@@ -8,46 +8,46 @@ exports.c_facturacion_model = (sequelize) => {
             allowNull: false,
             autoIncrement: true,
             primaryKey: true,
-            field: 'id_c_facturacion'
+            field: 'id'
         },
         fCorreoElectronico: {
-            type: sequelize_1.DataTypes.TINYINT,
+            type: sequelize_1.DataTypes.BOOLEAN,
             allowNull: false,
             defaultValue: 0,
             field: 'f_correo_electronico'
         },
         fAlquiler1CadaMes: {
-            type: sequelize_1.DataTypes.TINYINT,
+            type: sequelize_1.DataTypes.BOOLEAN,
             allowNull: false,
             defaultValue: 0,
             field: 'f_alquiler_1'
         },
         fPagoAutomatico: {
-            type: sequelize_1.DataTypes.TINYINT,
+            type: sequelize_1.DataTypes.BOOLEAN,
             allowNull: false,
             defaultValue: 0,
             field: 'f_pago_automatico'
         },
         fDepositoSeguridad: {
-            type: sequelize_1.DataTypes.TINYINT,
+            type: sequelize_1.DataTypes.BOOLEAN,
             allowNull: false,
             defaultValue: 0,
             field: 'f_deposito_seguridad'
         },
         fEfectivoAceptado: {
-            type: sequelize_1.DataTypes.TINYINT,
+            type: sequelize_1.DataTypes.BOOLEAN,
             allowNull: false,
             defaultValue: 0,
             field: 'f_efectivo'
         },
         fChequesAceptado: {
-            type: sequelize_1.DataTypes.TINYINT,
+            type: sequelize_1.DataTypes.BOOLEAN,
             allowNull: false,
             defaultValue: 0,
             field: 'f_cheques'
         },
         fTarjetasAceptado: {
-            type: sequelize_1.DataTypes.TINYINT,
+            type: sequelize_1.DataTypes.BOOLEAN,
             allowNull: false,
             defaultValue: 0,
             field: 'f_tarjetas'

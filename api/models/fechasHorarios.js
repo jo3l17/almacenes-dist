@@ -1,24 +1,23 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const sequelize_1 = require("sequelize");
-exports.c_mudanza_model = (sequelize) => {
-    var c_mudanza_model = sequelize.define('t_c_mudanza', {
-        idCMudanza: {
+exports.fechas_horario_model = (sequelize) => {
+    var fechas_horario_model = sequelize.define('t_fechas_horarios', {
+        idFechasHorarios: {
             type: sequelize_1.DataTypes.INTEGER,
             allowNull: false,
             autoIncrement: true,
             primaryKey: true,
             field: 'id'
         },
-        mSuministros: {
-            type: sequelize_1.DataTypes.BOOLEAN,
+        nombre: {
+            type: sequelize_1.DataTypes.CHAR(255),
             allowNull: false,
-            defaultValue: 0,
-            field: 'm_suministros'
+            field: 'nombre'
         },
     }, {
         timestamps: false,
-        tableName: 't_c_mudanza'
+        tableName: 't_fechas_horarios'
     });
-    return c_mudanza_model;
+    return fechas_horario_model;
 };

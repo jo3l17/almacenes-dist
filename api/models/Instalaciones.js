@@ -10,30 +10,20 @@ exports.instalaciones_model = (sequelize) => {
             allowNull: false,
             autoIncrement: true,
             primaryKey: true,
-            field: 'id_instalacion'
+            field: 'id'
         },
         nombreInstalacion: {
             type: sequelize_1.DataTypes.STRING(41),
             allowNull: true,
             field: 'nombre_instalacion'
         },
-        nroInstalacion: {
-            type: sequelize_1.DataTypes.INTEGER,
-            allowNull: true,
-            field: 'nro_instalacion'
-        },
-        paginaWeb: {
-            type: sequelize_1.DataTypes.STRING(73),
-            allowNull: true,
-            field: 'pagina_WEB'
-        },
         regionInstalacion: {
-            type: sequelize_1.DataTypes.STRING(10),
+            type: sequelize_1.DataTypes.STRING(255),
             allowNull: true,
             field: 'region_instalacion'
         },
         comunaInstalacion: {
-            type: sequelize_1.DataTypes.STRING(19),
+            type: sequelize_1.DataTypes.STRING(255),
             allowNull: true,
             field: 'comuna_instalacion'
         },
@@ -68,17 +58,22 @@ exports.instalaciones_model = (sequelize) => {
             allowNull: true,
             field: 'longitud_instalacion'
         },
-        visitas: {
-            type: sequelize_1.DataTypes.INTEGER,
-            allowNull: false,
-            defaultValue: 0,
-            field: 'visitas_instalacion'
-        },
         usuId: {
             type: sequelize_1.DataTypes.INTEGER,
             allowNull: true,
             field: 'usu_id'
-        }
+        },
+        ventanaReserva: {
+            type: sequelize_1.DataTypes.INTEGER,
+            allowNull: true,
+            field: 'ventana_reserva'
+        },
+        eliminar: {
+            type: sequelize_1.DataTypes.BOOLEAN,
+            allowNull: false,
+            defaultValue: false,
+            field: 'eliminar'
+        },
     }, {
         timestamps: false,
         tableName: 't_instalaciones'

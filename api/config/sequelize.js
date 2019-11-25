@@ -4,23 +4,23 @@ const Instalaciones_1 = require("../models/Instalaciones");
 const mini_bodegas_1 = require("../models/mini_bodegas");
 const unidades_1 = require("../models/unidades");
 const usuario_1 = require("../models/usuario");
-const amenidades_1 = require("../models/amenidades");
-const instAmn_1 = require("../models/instAmn");
 const caracteristicas_1 = require("../models/caracteristicas");
 const galeria_1 = require("../models/galeria");
-const cAcceso_1 = require("../models/cAcceso");
-const cFacturacion_1 = require("../models/cFacturacion");
-const cMudanza_1 = require("../models/cMudanza");
-const cAdministracion_1 = require("../models/cAdministracion");
-const cCobertura_1 = require("../models/cCobertura");
-const cSeguridad_1 = require("../models/cSeguridad");
 const reservas_1 = require("../models/reservas");
 const regisroClickTelefono_1 = require("../models/regisroClickTelefono");
+const visitasInstalaciones_1 = require("../models/visitasInstalaciones");
+const horarios_1 = require("../models/horarios");
+const tipoHorario_1 = require("../models/tipoHorario");
+const fechasHorarios_1 = require("../models/fechasHorarios");
 const Sequelize = require('sequelize');
-exports.sequelize = new Sequelize('R63uiu6aze', 'R63uiu6aze', 'ZTWDTRy5QP', {
-    // export const sequelize = new Sequelize('hardmachine_almacenes', 'hardmachine_admin', 'kassandra@2015', {
-    // host: '142.44.199.21',
-    host: 'remotemysql.com',
+// export const sequelize = new Sequelize('R63uiu6aze', 'R63uiu6aze', 'ZTWDTRy5QP', {
+// export const sequelize = new Sequelize('bwgybU3cwU', 'bwgybU3cwU', 'Zc4fb3RDuT', {
+exports.sequelize = new Sequelize('mercadob_almacenes', 'mercadob_administrador', 'amdigital_2019', {
+    // export const sequelize = new Sequelize('almacenes', 'administrador', 'kassandra@2015', {
+    // host: '68.66.224.55',//mercadobodegas.net
+    host: '172.96.186.242',
+    // host: 'remotemysql.com',
+    // host: '192.168.1.6',
     dialect: 'mysql',
     timezone: '-05:00',
     logging: console.log
@@ -29,18 +29,16 @@ exports.miniBodegas = mini_bodegas_1.miniBodegas_model(exports.sequelize);
 exports.instalaciones = Instalaciones_1.instalaciones_model(exports.sequelize);
 exports.unidades = unidades_1.unidades_model(exports.sequelize);
 exports.Usuario = usuario_1.usuario_model(exports.sequelize);
-exports.amenidades = amenidades_1.amenidades_model(exports.sequelize);
-exports.instAmn = instAmn_1.instalacion_amenidad_model(exports.sequelize);
+// export const amenidades = amenidades_model(sequelize)
+// export const instAmn = instalacion_amenidad_model(sequelize)
 exports.caracteristicas = caracteristicas_1.caracteristicas_model(exports.sequelize);
 exports.galeria = galeria_1.galeria_model(exports.sequelize);
-exports.cAcceso = cAcceso_1.c_acceso_model(exports.sequelize);
-exports.cFacturacion = cFacturacion_1.c_facturacion_model(exports.sequelize);
-exports.cMudanza = cMudanza_1.c_mudanza_model(exports.sequelize);
-exports.cAdministracion = cAdministracion_1.c_administracion_model(exports.sequelize);
-exports.cCobertura = cCobertura_1.c_cobertura_model(exports.sequelize);
-exports.cSeguridad = cSeguridad_1.c_seguridad_model(exports.sequelize);
 exports.reserva = reservas_1.reserva_model(exports.sequelize);
 exports.clickTelefono = regisroClickTelefono_1.clickTelefono_model(exports.sequelize);
+exports.visitasInstalaciones = visitasInstalaciones_1.visitas_instalaciones_model(exports.sequelize);
+exports.horarios = horarios_1.horarios_model(exports.sequelize);
+exports.TipoHorario = tipoHorario_1.tipo_horario_model(exports.sequelize);
+exports.FechasHorario = fechasHorarios_1.fechas_horario_model(exports.sequelize);
 exports.instalaciones.belongsTo(exports.miniBodegas, { foreignKey: 'id_operador' });
 exports.miniBodegas.hasMany(exports.instalaciones, { foreignKey: 'id_operador' });
 exports.unidades.belongsTo(exports.instalaciones, { foreignKey: 'id_instalacion' });
@@ -49,27 +47,25 @@ exports.miniBodegas.belongsTo(exports.Usuario, { foreignKey: 'usu_id' });
 exports.Usuario.hasMany(exports.miniBodegas, { foreignKey: 'usu_id' });
 exports.instalaciones.belongsTo(exports.Usuario, { foreignKey: 'usu_id' });
 exports.Usuario.hasOne(exports.instalaciones, { foreignKey: 'usu_id' });
-exports.instAmn.belongsTo(exports.amenidades, { foreignKey: 'id_amenidad' });
-exports.amenidades.hasMany(exports.instAmn, { foreignKey: 'id_amenidad' });
-exports.instAmn.belongsTo(exports.instalaciones, { foreignKey: 'id_instalacion' });
-exports.instalaciones.hasMany(exports.instAmn, { foreignKey: 'id_instalacion' });
+// instAmn.belongsTo(amenidades, { foreignKey: 'id_amenidad' });
+// amenidades.hasMany(instAmn, { foreignKey: 'id_amenidad' })
+// instAmn.belongsTo(instalaciones, { foreignKey: 'id_instalacion' });
+// instalaciones.hasMany(instAmn, { foreignKey: 'id_instalacion' })
 exports.caracteristicas.belongsTo(exports.unidades, { foreignKey: 'id_unidad' });
 exports.unidades.hasOne(exports.caracteristicas, { foreignKey: 'id_unidad' });
+exports.horarios.belongsTo(exports.instalaciones, { foreignKey: 'id_instalacion' });
+exports.instalaciones.hasMany(exports.horarios, { foreignKey: 'id_instalacion' });
+exports.horarios.belongsTo(exports.TipoHorario, { foreignKey: 'id_tipo' });
+exports.TipoHorario.hasMany(exports.horarios, { foreignKey: 'id_tipo' });
+exports.horarios.belongsTo(exports.FechasHorario, { foreignKey: 'id_fechas' });
+exports.FechasHorario.hasMany(exports.horarios, { foreignKey: 'id_fechas' });
 exports.unidades.hasMany(exports.reserva, { foreignKey: 'id_unidad' });
 exports.reserva.belongsTo(exports.unidades, { foreignKey: 'id_unidad' });
 exports.galeria.belongsTo(exports.instalaciones, { foreignKey: 'id_instalacion' });
 exports.instalaciones.hasMany(exports.galeria, { foreignKey: 'id_instalacion' });
-exports.instalaciones.hasOne(exports.cAcceso, { foreignKey: 'id_instalacion' });
-exports.instalaciones.hasOne(exports.cFacturacion, { foreignKey: 'id_instalacion' });
-exports.instalaciones.hasOne(exports.cMudanza, { foreignKey: 'id_instalacion' });
-exports.instalaciones.hasOne(exports.cAdministracion, { foreignKey: 'id_instalacion' });
-exports.instalaciones.hasOne(exports.cCobertura, { foreignKey: 'id_instalacion' });
-exports.instalaciones.hasOne(exports.cSeguridad, { foreignKey: 'id_instalacion' });
-exports.cAcceso.belongsTo(exports.instalaciones, { foreignKey: 'id_instalacion' });
-exports.cFacturacion.belongsTo(exports.instalaciones, { foreignKey: 'id_instalacion' });
-exports.cMudanza.belongsTo(exports.instalaciones, { foreignKey: 'id_instalacion' });
-exports.cAdministracion.belongsTo(exports.instalaciones, { foreignKey: 'id_instalacion' });
-exports.cCobertura.belongsTo(exports.instalaciones, { foreignKey: 'id_instalacion' });
-exports.cSeguridad.belongsTo(exports.instalaciones, { foreignKey: 'id_instalacion' });
 exports.clickTelefono.belongsTo(exports.instalaciones, { foreignKey: 'id_instalacion' });
 exports.instalaciones.hasMany(exports.clickTelefono, { foreignKey: 'id_instalacion' });
+exports.visitasInstalaciones.belongsTo(exports.instalaciones, { foreignKey: 'id_instalacion' });
+exports.instalaciones.hasMany(exports.visitasInstalaciones, { foreignKey: 'id_instalacion' });
+exports.visitasInstalaciones.belongsTo(exports.miniBodegas, { foreignKey: 'id_empresa' });
+exports.miniBodegas.hasMany(exports.visitasInstalaciones, { foreignKey: 'id_empresa' });

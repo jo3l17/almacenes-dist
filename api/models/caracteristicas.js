@@ -8,15 +8,15 @@ exports.caracteristicas_model = (sequelize) => {
             allowNull: false,
             autoIncrement: true,
             primaryKey: true,
-            field: 'id_caracteristica'
+            field: 'id'
         },
         climaControlado: {
-            type: sequelize_1.DataTypes.TINYINT,
+            type: sequelize_1.DataTypes.BOOLEAN,
             allowNull: true,
             field: 'clima_controlado'
         },
         acceso24Horas: {
-            type: sequelize_1.DataTypes.TINYINT,
+            type: sequelize_1.DataTypes.BOOLEAN,
             allowNull: true,
             field: 'acceso24Horas'
         },

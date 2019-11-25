@@ -10,19 +10,7 @@ exports.unidades_model = (sequelize) => {
             allowNull: false,
             autoIncrement: true,
             primaryKey: true,
-            field: 'id_unidad'
-        },
-        largo: {
-            type: sequelize_1.DataTypes.FLOAT,
-            allowNull: false,
-            defaultValue: 15,
-            field: 'largo_unidad'
-        },
-        ancho: {
-            type: sequelize_1.DataTypes.FLOAT,
-            allowNull: false,
-            defaultValue: 10,
-            field: 'ancho_unidad'
+            field: 'id'
         },
         areaTotal: {
             type: sequelize_1.DataTypes.INTEGER,
@@ -39,8 +27,36 @@ exports.unidades_model = (sequelize) => {
         Visible: {
             type: sequelize_1.DataTypes.TINYINT,
             allowNull: false,
-            defaultValue: 1,
+            defaultValue: 0,
             field: 'visible_unidad'
+        },
+        Cantidad: {
+            type: sequelize_1.DataTypes.TINYINT,
+            allowNull: false,
+            defaultValue: 1,
+            field: 'cantidad'
+        },
+        eliminar: {
+            type: sequelize_1.DataTypes.BOOLEAN,
+            allowNull: false,
+            defaultValue: false,
+            field: 'eliminar'
+        },
+        idEmpresa: {
+            type: sequelize_1.DataTypes.INTEGER,
+            allowNull: false,
+            field: 'id_empresa'
+        },
+        VentanaReserva: {
+            type: sequelize_1.DataTypes.INTEGER,
+            allowNull: false,
+            defaultValue: 15,
+            field: 'ventana_reserva'
+        },
+        oferta: {
+            type: sequelize_1.DataTypes.TEXT,
+            allowNull: true,
+            field: 'oferta'
         }
     }, {
         timestamps: false,
